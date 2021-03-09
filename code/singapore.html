@@ -1,8 +1,153 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        
+        <title>Singapore</title>  <!-- a title for the webpage tab -->
+        
+        <!-- Set up the style of the map (i.e. size) and text for the web page -->
+        <style type="text/css">
+			html, body { height: 100%; margin: 15px; padding: 0;}
+			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto;}
+		</style>
+        
+        <!-- ACCESS the code that runs Leaflet from the web -->
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+            integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+            crossorigin=""/>
+        
+        <!-- Leaflet JavaScript Library -->
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+        
+        <!-- The Main JavaScript Code Block that will run our map -->
+        <script> 
+            
+        // Basemap layer for your map -- many more choices here: https://leaflet-extras.github.io/leaflet-providers/preview/
+            var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+            });
+
+            var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+
+            var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+                maxZoom: 16
+            });
+
+            var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+            });
+
+            // all base maps
+            var baseMaps = {
+                "<b>OSM Streets</b>" : OpenStreetMap_HOT,
+                "<b>ESRI Imagery</b>" : Esri_WorldImagery,
+                "<b>ESRI Topographic</b>" : Esri_WorldTopoMap,
+                "<b>ESRI Nat Geo</b>" : Esri_NatGeoWorldMap,
+            };
+            // icons
+            var schoolIcon = L.icon({
+                iconUrl: 'school.svg',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+            var lakeIcon = L.icon({
+                iconUrl: 'lake.svg',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+            var parkIcon = L.icon({
+                iconUrl: 'park.svg',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+            // shapes
+            var greenCircle = L.circle([47.442048, -122.110193],{
+                    color: '#42f5c2',
+                    fillColor: '#c5fced',
+                    fillOpacity: '.5',
+                    radius: 500
+                }).bindPopup("<p style ='font-family:verdana'>I really dont know what I would circle, so heres a random one to show I know how to put one on the map, I guess</p>");
+            
+            var orangeTriangle = L.polygon([
+                [47.436483, -122.114131],
+                [47.440842, -122.107157],
+                [47.442380, -122.116516]], {
+                    color: '#fcc55d',
+                    fillColor: '#fae3b6',
+                    fillOpacity: '.5'
+                }).bindPopup("<p style ='font-family:verdana'>Here's a triangle that goes between the three places on this map</p>");
+            
+            //lines
+            var line1 = L.polyline([
+                [47.442048, -122.110193],
+                [47.436483, -122.114131]], {
+                    color: '#d64f2d',
+                    width: '15px'
+                }).bindPopup("<p style ='font-family:verdana'><b>Line going from the center of the map to the school</b></p>");
+            
+            var line2 = L.polyline([
+                [47.442048, -122.110193],
+                [47.440842, -122.107157]], {
+                    color: '#d64f2d',
+                    width: '15px'
+                }).bindPopup("<p style ='font-family:verdana'><b>Line going from the center of the map to the lake</b></p>");
+           
+            var line3 = L.polyline([
+                [47.442048, -122.110193],
+                [47.442380, -122.116516]], {
+                    color: '#d64f2d',
+                    width: '15px'
+                }).bindPopup("<p style ='font-family:verdana'><b>Line going from the center of the map to the park</b></p>");
+        
+            // markers
+            var marker1 = L.marker([47.436483, -122.114131], {icon: schoolIcon}).bindPopup("<p style ='font-family:verdana'>This was my middle school. I prefer not to think about it.</p>");
+            var marker2 = L.marker([47.440842, -122.107157], {icon: lakeIcon}).bindPopup("<p style ='font-family:verdana'>This is this the lake where all the rich kids who said they weren't rich lived.</p>");
+            var marker3 = L.marker([47.442380, -122.116516], {icon: parkIcon}).bindPopup("<p style ='font-family:verdana'>My dad used to come to this park to play Pokemon Go every day.</p>");
+        
+            // all overlays
+            var overLays = {
+                "<b>School Marker</b>" : marker1,
+                "<b>Lake Marker</b>" : marker2,
+                "<b>Park Marker</b>" : marker3,
+                "<b>Circle</b>" : greenCircle,
+                "<b>Triangle</b>" : orangeTriangle,
+                "<b>Center to School</b>" : line1,
+                "<b>Center to Lake</b>" : line2,
+                "<b>Center to Park</b>" : line3,
+            }
+                        
+            // Set up function to build the map
+            function initialize() {
+                
+                // This creates the map
+                var map = L.map('map', {
+                    center: [47.442048, -122.110193],  // this sets the center of the map [lat, lon]
+                    zoom: 15,                     // this sets the zoom level of the map when it loads
+                    layers: [OpenStreetMap_HOT]   // this defines the base map
+
+                });
+
+                L.control.layers(baseMaps, overLays, {collapsed: false}).addTo(map);
+
+            // End initialize() function
+            }
+        </script>
     </head>
-    <body>
+    
+    <body onload="initialize()">  <!-- run the initiialize() function when the page loads -->
+        <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Fairwood, Washington</h1>  <!-- Title above the map -->
+        
+        <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
+        <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </body>
 </html>

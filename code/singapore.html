@@ -73,7 +73,7 @@
                 "<b>ESRI World Street Map</b>": Esri_WorldStreetMap,
                 "<b>ESRI Nat Geo World Map</b>": Esri_NatGeoWorldMap,
                 "<b>Watercolor</b>": Stamen_Watercolor,
-                "<b>Background (Recommended)</b>": Stamen_TerrainBackground,
+                "<b>Background</b>": Stamen_TerrainBackground,
             }
                
             // icons
@@ -91,12 +91,95 @@
             });
             var neighborhood = L.icon({
                 iconUrl: '../assets/Singapore/icons/building.svg',
-                iconSize: [25, 25],
-                iconAnchor: [12, 12],
-                popupAnchor: [0, -12]
+                iconSize: [60, 60],
+                iconAnchor: [30, 30],
+                popupAnchor: [0, -30]
             });
 
- 
+            // pokemon
+            var dewgong = L.icon({
+                iconUrl: '../assets/Singapore/icons/Dewgong.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var pheromosa = L.icon({
+                iconUrl: '../assets/Singapore/icons/pheromosa.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var rattata = L.icon({
+                iconUrl: '../assets/Singapore/icons/rattata.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var sandshrew = L.icon({
+                iconUrl: '../assets/Singapore/icons/sandshrew.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var treecko = L.icon({
+                iconUrl: '../assets/Singapore/icons/treecko.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            // markers
+
+            var sandshrewMarker = new L.Marker([1.385166, 103.800289],
+                {
+                    icon: sandshrew,
+                }
+            )
+            sandshrewMarker.bindPopup("Sandshrew is based off of the pangolin. Believe or not, they can be found in Singapore! Although they are strugging due to habitat loss, they can be found in places such as this one, which is a nature reserve.", {});
+
+            var pheromosaMarker = new L.Marker([1.349671, 103.868623],
+                {
+                    icon: pheromosa,
+                }
+            )
+            
+            pheromosaMarker.bindPopup("The beautiful pheromosa is based off one of the world's most hated bugs, the cockroach. Cockroaches are famous for living just about anywhere, and Singapore is no exception. Be careful when opening your trash chute! One might fly out at you.", {});
+        
+            
+            var rattataMarker = new L.Marker([1.391630, 103.705395],
+                {
+                    icon: rattata,
+                }
+            )
+            
+            rattataMarker.bindPopup("Rats, rats, we're the rats! \n Just like every other city, rats can be found in Singapore, despite the strict sanitation standards. While Rattata makes an excellent friend, its generally advised to stay away from rats as they can be dangerous.", {});
+
+            var dewgongMarker = new L.Marker([1.264499, 103.767193],
+                {
+                    icon: dewgong,
+                }
+            )
+            
+            dewgongMarker.bindPopup("Although rare, dugongs, which dewgong is based off of, can be spotted off the coast of Singapore. While dewgongs are ice-type pokemon that love the cold, the water in Singapore is actually quite warm.", {});
+        
+
+            var treeckoMarker = new L.Marker([1.330932, 103.694966],
+                {
+                    icon: treecko,
+                }
+            )
+            
+            treeckoMarker.bindPopup("Many amphibians can be found in Singapore! One example is the gecko. While Treecko is actually a wood gecko, which are found in Australia, there plenty of his cousins, the common house geckos, reside in Singapore. They can often be found inside human apartments. Just don't scare them or they might drop their tails!", {});
+        
+
+
+
+            // marker group
+            var pokemon = L.layerGroup([sandshrewMarker, pheromosaMarker, rattataMarker, dewgongMarker, treeckoMarker]);
             // marts
             function popupsMart(feature, layer) {
                 layer.bindPopup("Lots of supermarkets near here!")
@@ -143,7 +226,7 @@
             function lineSymbology (feature) {
                 return {
                     color: "#4d0000",
-                    weight: 2,
+                    weight: 6,
                     opacity: 1,
                 };
             }
@@ -155,6 +238,7 @@
                 "<b>Poke Centers</b>" : centerPoints,
                 "<b>Stations</b>" : neighborhoods,
                 "<b>Routes</b>" : routesLines,
+                "<b>Pokemon</b>" : pokemon,
             }
                         
             // Set up function to build the map
@@ -163,8 +247,8 @@
                 // This creates the map
                 var map = L.map('map', {
                     center: [1.39016,103.842],  // this sets the center of the map [lat, lon]
-                    zoom: 12,                    // this sets the zoom level of the map when it loads
-                    layers: [Stamen_TerrainBackground]   // this defines the base map
+                    zoom: 11,                    // this sets the zoom level of the map when it loads
+                    layers: [Stamen_Watercolor]   // this defines the base map
 
                 });
 
@@ -179,6 +263,6 @@
         <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Singapore</h1>  <!-- Title above the map -->
         
         <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
-        <div> Pokemon Center from https://pwo-wiki.info/images/c/c2/Pokemon_Center_Exterior.png, Poke Mart from https://cdn.bulbagarden.net/upload/9/9b/Pok%C3%A9_Mart_FRLG.png </div>
+        <div> Pokemon Center from https://pwo-wiki.info/images/c/c2/Pokemon_Center_Exterior.png, Poke Mart from https://cdn.bulbagarden.net/upload/9/9b/Pok%C3%A9_Mart_FRLG.png, All pokemon images from bulbapedia </div>
         <div>City icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>SE Asia Pokemon</title>  <!-- a title for the webpage tab -->
+        
+        <!-- Set up the style of the map (i.e. size) and text for the web page -->
+        <style type="text/css">
+			html, body { height: 100%; margin: 15px; padding: 0;}
+			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto}
+		</style>
+        
+        <!-- ACCESS the code that runs Leaflet from the web -->
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+            integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+            crossorigin=""/>
+        
+        <!-- Leaflet JavaScript Library -->
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+        
+        <!-- The Main JavaScript Code Block that will run our map -->
+        <script> 
+            
+        // Basemap layer for your map -- many more choices here: https://leaflet-extras.github.io/leaflet-providers/preview/
+            
+            
+           var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+	       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	       subdomains: 'abcd',
+	       minZoom: 1,
+	       maxZoom: 16,
+	       ext: 'jpg'
+            });
+            
+            
+            var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+            });
+            
+            var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+            
+            var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+            });
+            
+            var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+	           maxZoom: 16
+            });
+           
+            var baseMaps = {
+                "<b>OSM Streets</b>": OpenStreetMap_HOT,
+                "<b>ESRI World Imagery</b>": Esri_WorldImagery,
+                "<b>ESRI World Street Map</b>": Esri_WorldStreetMap,
+                "<b>ESRI Nat Geo World Map</b>": Esri_NatGeoWorldMap,
+                "<b>Watercolor</b>": Stamen_Watercolor}
+                
+            var myIcon = L.icon({
+                iconUrl: '../assets/Region/icons/singapore.png',
+                iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon2 = L.icon({
+                iconUrl: '../assets/Region/icons/malaysia.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon3 = L.icon({
+                iconUrl: '../assets/Region/icons/cambodia.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon4 = L.icon({
+                iconUrl: '../assets/Region/icons/vietnam.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon5 = L.icon({
+                iconUrl: '../assets/Region/icons/thailand.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon6 = L.icon({
+                iconUrl: '../assets/Region/icons/laos.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+            
+            
+            var myIcon7 = L.icon({
+                iconUrl: '../assets/Region/icons/myanmar.png',
+               iconSize: [40, 40],
+                iconAnchor: [50, 50],
+                popupAnchor: [50, 50]
+                
+            });
+        
+           var latlngs = [
+                [1.3574590834827873, 103.86794791378763],
+                [3.152551588545505, 101.69247227638809],
+                [6.313629462771546, 100.65426426893303],
+                [8.883412497559982, 98.72067064475205],
+                [13.38798586253809, 99.66549479916279],
+                [13.72974958771858, 100.52242833715208]
+];
+            
+            var latlngs2 = [
+                [13.72974958771858, 100.52242833715208],
+                [12.938685495337399, 102.8075845828628],
+                [11.542971184160693, 104.96090475524615],
+                [10.78849120339916, 106.6527991764045],
+                [12.18806240616743, 108.85006484572709],
+                [14.852594343629491, 108.76427577075735],
+                [15.832920132497, 108.03707661737825],
+                [18.831925914761573, 105.13668618110681],
+                [21.0419238615414, 105.83981110532945],
+                [22.76169084256574, 103.79820237252133],
+                [24.874819596817783, 102.83988845327254]
+];
+            
+            var latlngs3 = [
+                [24.874819596817783, 102.83988845327254],
+                [21.531431313481367, 101.57424569065422],
+                [17.828257187708083, 102.72706578046852],
+                [14.962410163175278, 102.10693434829865],
+                [14.38318461081633, 100.63476641207573],
+                [13.72974958771858, 100.52242833715208]
+                
+];
+            
+            var latlngs4 = [
+                [13.72974958771858, 100.52242833715208],
+                [14.081090113409076, 98.19614352641425],
+                [16.38194503814147, 97.93298665266876],
+                [17.642585621069625, 97.01013515021876],
+                [21.94164740505736, 96.08728365205803],
+                [24.023102588672856, 97.75615901058238],
+                [25.73747802121425, 100.15648769161125],
+                [24.874819596817783, 102.83988845327254]
+                
+];
+            
+            var point1 = L.marker([1.3869594216596461, 103.90140691312331], {icon:myIcon});
+            
+            var point2 = L.marker([3.505267546897482, 101.83597739142334],{icon:myIcon2});
+            
+            var point3 = L.marker([12.932360489677642, 104.20902467210422],{icon:myIcon3});
+            
+            var point4 = L.marker([14.724485464230314, 108.16410188344028], {icon:myIcon4});
+            
+            var point5 = L.marker([15.911217585599788, 101.4404696106723],{icon:myIcon5});
+            
+            var point6 = L.marker([19.634893619592848, 102.40726700423828],{icon:myIcon6});
+            
+    //        var point7 = L.marker([21.281762671279612, 96.6504310102957],{icon:myIcon3});
+            
+          var point7 = L.marker([21.081762671279612, 97.0504310102957],{icon:myIcon7}).bindPopup("Myanmar (Burma)");
+            
+            var circle1 = L.circle([33.365531315111625, -111.85815312739265],    {
+                color: 'green',
+                fillColor: '#00ff00',
+                fillOpacity: 0.3,
+                radius: 200 // in meters
+                }).bindPopup("Area with good food");
+            
+            
+               
+            var polyline = L.polyline(latlngs, {color: 'black'})
+            ;
+            
+            var polyline2 = L.polyline(latlngs2, {color: 'purple'})
+            ;
+            
+            var polyline3 = L.polyline(latlngs3, {color: 'green'})
+            ;
+            
+            var polyline4 = L.polyline(latlngs4, {color: 'red'})
+            ;
+            
+            var overLays = {
+                "<b>Singapore Gym</b>": point1,
+                "<b>Malaysia Gym</b>": point2,
+                "<b>Cambodia Gym</b>": point3,
+                "<b>Vietnam Gym</b>": point4,
+                "<b>Thailand Gym</b>": point5,
+                "<b>Laos Gym</b>": point6,
+                "<b>Myanmar Gym</b>": point7,
+                "<b>Route 1</b>": polyline,
+                "<b>Route 2</b>": polyline2,
+                "<b>Route 3</b>": polyline3,
+                "<b>Route 4</b>": polyline4,
+                };
+            
+            
+             
+            //var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+            
+            
+        // Set up function to build the map
+            function initialize() {
+                     
+        // This creates the map
+            var map = L.map('map', {     
+            center: [14.164476949844767, 104.49210212494292],  // this sets the center of the map [lat, lon]
+            zoom: 5,                     // this sets the zoom level of the                                    map when it loads
+            layers: [Stamen_Watercolor]   // this defines the base map
+            });
+                    
+            L.control.layers(baseMaps, overLays, {collapsed:false}).addTo(map);
+                
+                
+            }
+            // End initialize() function
+        
+        </script>
+    </head>
+    
+    <body onload="initialize()">  <!-- run the initiialize() function when the page loads -->
+        <h1>This is a map for Pokemon in SE Asia! (In Progress)</h1>  <!-- Title above the map -->
+        
+        <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
+    
+    </body>
+</html>
+
+
+
+
+   

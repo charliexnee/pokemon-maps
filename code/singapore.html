@@ -1,8 +1,184 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        
+        <title>Singapore</title>  <!-- a title for the webpage tab -->
+        
+        <!-- Set up the style of the map (i.e. size) and text for the web page -->
+        <style type="text/css">
+			html, body { height: 100%; margin: 15px; padding: 0;}
+			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto;}
+		</style>
+        
+        <!-- ACCESS the code that runs Leaflet from the web -->
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+            integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+            crossorigin=""/>
+        
+        <!-- Leaflet JavaScript Library -->
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+
+       <script src="../assets/Singapore/singapore-neighborhoods.geojson"></script>
+        <script src="../assets/Singapore/pokemarts.geojson"></script>
+        <script src="../assets/Singapore/pokemon-centers.geojson"></script>
+        <script src="../assets/Singapore/routes.geojson"></script>
+        
+        <!-- The Main JavaScript Code Block that will run our map -->
+        <script> 
+            
+
+
+        // Basemap layer for your map -- many more choices here: https://leaflet-extras.github.io/leaflet-providers/preview/
+        var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+	       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	       subdomains: 'abcd',
+	       minZoom: 1,
+	       maxZoom: 16,
+	       ext: 'jpg'
+            });
+            var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 0,
+                maxZoom: 18,
+                ext: 'png'
+            });
+            
+            
+            var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+            });
+            
+            var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+            
+            var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+            });
+            
+            var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+	           attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+	           maxZoom: 16
+            });
+           
+            var baseMaps = {
+                "<b>OSM Streets</b>": OpenStreetMap_HOT,
+                "<b>ESRI World Imagery</b>": Esri_WorldImagery,
+                "<b>ESRI World Street Map</b>": Esri_WorldStreetMap,
+                "<b>ESRI Nat Geo World Map</b>": Esri_NatGeoWorldMap,
+                "<b>Watercolor</b>": Stamen_Watercolor,
+                "<b>Background (Recommended)</b>": Stamen_TerrainBackground,
+            }
+               
+            // icons
+            var pokeCenter = L.icon({
+                iconUrl: '../assets/Singapore/icons/pokemon-center.png',
+                iconSize: [25, 25],
+                iconAnchor: [12, 12],
+                popupAnchor: [0, -12]
+            });
+            var pokeMart = L.icon({
+                iconUrl: '../assets/Singapore/icons/poke-mart.png',
+                iconSize: [25, 25],
+                iconAnchor: [12, 12],
+                popupAnchor: [0, -12]
+            });
+            var neighborhood = L.icon({
+                iconUrl: '../assets/Singapore/icons/building.svg',
+                iconSize: [25, 25],
+                iconAnchor: [12, 12],
+                popupAnchor: [0, -12]
+            });
+
+ 
+            // marts
+            function popupsMart(feature, layer) {
+                layer.bindPopup("Lots of supermarkets near here!")
+            };
+
+            // marts
+            var martPoints = new L.geoJson(pokemarts, {
+                pointToLayer: function(feature, latlng){
+                    return new L.Marker(latlng, {
+                        icon: pokeMart,
+                    });
+                }, onEachFeature: popupsMart
+            });
+
+            // centers
+            function popupsCenter(feature, layer) {
+                layer.bindPopup("Lots of hawker centers near here!")
+            };
+
+            // centers
+            var centerPoints = new L.geoJson(pokecenters, {
+                pointToLayer: function(feature, latlng){
+                    return new L.Marker(latlng, {
+                        icon: pokeCenter,
+                    });
+                }, onEachFeature: popupsCenter
+            });
+            // stations 
+
+            function popupsStations(feature, layer) {
+                layer.bindPopup(feature.properties.Name);
+            };
+
+            var neighborhoods = new L.geoJson(names, {
+                pointToLayer: function(feature, latlng){
+                    return new L.Marker(latlng, {
+                        icon: neighborhood,
+                    });
+                },
+                onEachFeature: popupsStations,
+            })
+            
+            // routes
+            function lineSymbology (feature) {
+                return {
+                    color: "#4d0000",
+                    weight: 2,
+                    opacity: 1,
+                };
+            }
+
+            var routesLines = L.geoJson(routes, {style: lineSymbology});
+            // all overlays
+            var overLays = {
+                "<b>Poke Marts</b>" : martPoints,
+                "<b>Poke Centers</b>" : centerPoints,
+                "<b>Stations</b>" : neighborhoods,
+                "<b>Routes</b>" : routesLines,
+            }
+                        
+            // Set up function to build the map
+            function initialize() {
+                
+                // This creates the map
+                var map = L.map('map', {
+                    center: [1.39016,103.842],  // this sets the center of the map [lat, lon]
+                    zoom: 12,                    // this sets the zoom level of the map when it loads
+                    layers: [Stamen_TerrainBackground]   // this defines the base map
+
+                });
+
+                L.control.layers(baseMaps, overLays, {collapsed: false}).addTo(map);
+
+            // End initialize() function
+            }
+        </script>
     </head>
-    <body>
-    </body>
+    
+    <body onload="initialize()">  <!-- run the initiialize() function when the page loads -->
+        <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Singapore</h1>  <!-- Title above the map -->
+        
+        <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
+        <div> Pokemon Center from https://pwo-wiki.info/images/c/c2/Pokemon_Center_Exterior.png, Poke Mart from https://cdn.bulbagarden.net/upload/9/9b/Pok%C3%A9_Mart_FRLG.png </div>
+        <div>City icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 </html>

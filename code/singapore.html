@@ -6,8 +6,8 @@
         
         <!-- Set up the style of the map (i.e. size) and text for the web page -->
         <style type="text/css">
-			html, body { height: 100%; margin: 15px; padding: 0;}
-			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto;}
+			html, body { height: 100%; margin: 15px; padding: 0; font-family: Georgia, 'Times New Roman', Times, serif;}
+			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto; font-family: Georgia, 'Times New Roman', Times, serif;}
 		</style>
         
         <!-- ACCESS the code that runs Leaflet from the web -->
@@ -91,9 +91,9 @@
             });
             var neighborhood = L.icon({
                 iconUrl: '../assets/Singapore/icons/building.svg',
-                iconSize: [60, 60],
-                iconAnchor: [30, 30],
-                popupAnchor: [0, -30]
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -20]
             });
 
             // pokemon
@@ -158,7 +158,7 @@
             
             rattataMarker.bindPopup("Rats, rats, we're the rats! \n Just like every other city, rats can be found in Singapore, despite the strict sanitation standards. While Rattata makes an excellent friend, its generally advised to stay away from rats as they can be dangerous.", {});
 
-            var dewgongMarker = new L.Marker([1.264499, 103.767193],
+            var dewgongMarker = new L.Marker([1.404043, 103.997698],
                 {
                     icon: dewgong,
                 }
@@ -210,7 +210,7 @@
             // stations 
 
             function popupsStations(feature, layer) {
-                layer.bindPopup(feature.properties.Name);
+                layer.bindPopup("<h3>" + feature.properties.Name + "</h3> <p> You can earn badge number <b>" + feature.properties.num + "</b> here!</p>");
             };
 
             var neighborhoods = new L.geoJson(names, {
@@ -226,7 +226,7 @@
             function lineSymbology (feature) {
                 return {
                     color: "#4d0000",
-                    weight: 6,
+                    weight: 4,
                     opacity: 1,
                 };
             }
@@ -260,9 +260,16 @@
     </head>
     
     <body onload="initialize()">  <!-- run the initiialize() function when the page loads -->
-        <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Singapore</h1>  <!-- Title above the map -->
+        <h1>Singapore</h1>  <!-- Title above the map -->
         
         <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
-        <div> Pokemon Center from https://pwo-wiki.info/images/c/c2/Pokemon_Center_Exterior.png, Poke Mart from https://cdn.bulbagarden.net/upload/9/9b/Pok%C3%A9_Mart_FRLG.png, All pokemon images from bulbapedia </div>
+        <div> Pokemon Center from <a href="https://pwo-wiki.info/images/c/c2/Pokemon_Center_Exterior.png">pwo-wiki.info</a></body></div>
+        <div> Poke Mart from <a href="https://cdn.bulbagarden.net/upload/9/9b/Pok%C3%A9_Mart_FRLG.png">bulbagarden.net</a> </div>
+        <div>pokemon images from <a href="https://bulbapedia.bulbagarden.net/wiki/Main_Page">bulbapedia</a> </div>
         <div>City icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>
+            Animal Info Sources:
+            <li><a href="https://www.nparks.gov.sg/gardens-parks-and-nature/dos-and-donts/animal-advisories/pangolins"> Pangolin </a></li>
+            <li><a href="http://www.wildsingapore.com/wildfacts/vertebrates/mammals/dugong.htm"></a> Dugong </a></li>
+        </div>
 </html>

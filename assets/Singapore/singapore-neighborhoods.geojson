@@ -3,13 +3,13 @@ var names = {
 "name": "singapore-neighborhoods",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "id": 0, "Name": "Downtown" }, "geometry": { "type": "Point", "coordinates": [ 103.854805489973558, 1.275904090960816 ] } },
-{ "type": "Feature", "properties": { "id": 1, "Name": "Woodlands" }, "geometry": { "type": "Point", "coordinates": [ 103.787403670168402, 1.436830349807546 ] } },
-{ "type": "Feature", "properties": { "id": 2, "Name": "Yishun" }, "geometry": { "type": "Point", "coordinates": [ 103.833049286415772, 1.417524754315414 ] } },
-{ "type": "Feature", "properties": { "id": 3, "Name": "Ang Mo Kio" }, "geometry": { "type": "Point", "coordinates": [ 103.836392478614243, 1.384921747930619 ] } },
-{ "type": "Feature", "properties": { "id": 4, "Name": "Jurong West" }, "geometry": { "type": "Point", "coordinates": [ 103.705770512819427, 1.338460081608926 ] } },
-{ "type": "Feature", "properties": { "id": 5, "Name": "Bedok" }, "geometry": { "type": "Point", "coordinates": [ 103.941459485970171, 1.312713186313787 ] } },
-{ "type": "Feature", "properties": { "id": 6, "Name": "Tampines" }, "geometry": { "type": "Point", "coordinates": [ 103.962045098775988, 1.335177489207177 ] } },
-{ "type": "Feature", "properties": { "id": 7, "Name": "Bukit Merah" }, "geometry": { "type": "Point", "coordinates": [ 103.821418353424704, 1.265167002037737 ] } }
+{ "type": "Feature", "properties": { "id": 0, "Name": "Downtown", "num": 1 }, "geometry": { "type": "Point", "coordinates": [ 103.854805489973558, 1.275904090960816 ] } },
+{ "type": "Feature", "properties": { "id": 1, "Name": "Woodlands", "num": 5 }, "geometry": { "type": "Point", "coordinates": [ 103.787403670168402, 1.436830349807546 ] } },
+{ "type": "Feature", "properties": { "id": 2, "Name": "Yishun", "num": 4 }, "geometry": { "type": "Point", "coordinates": [ 103.833049286415772, 1.417524754315414 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Name": "Ang Mo Kio", "num": 6 }, "geometry": { "type": "Point", "coordinates": [ 103.836392478614243, 1.384921747930619 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Name": "Jurong West", "num": 7 }, "geometry": { "type": "Point", "coordinates": [ 103.705770512819427, 1.338460081608926 ] } },
+{ "type": "Feature", "properties": { "id": 5, "Name": "Bedok", "num": 2 }, "geometry": { "type": "Point", "coordinates": [ 103.941459485970171, 1.312713186313787 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Name": "Tampines", "num": 3 }, "geometry": { "type": "Point", "coordinates": [ 103.962045098775988, 1.335177489207177 ] } },
+{ "type": "Feature", "properties": { "id": 7, "Name": "Bukit Merah", "num": 8 }, "geometry": { "type": "Point", "coordinates": [ 103.821418353424704, 1.265167002037737 ] } }
 ]
 }

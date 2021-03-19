@@ -1,3 +1,59 @@
-# pokemon-maps
+Pokemon Maps
+Charlie Nee and Jimmy Nguyen 
+Final materials can be found here: smb://dartfs-hpc.dartmouth.edu/rc/lab/M/McKeonR/public_html/GEOG54_w2021/JimmyNguyen/Final 
+Alternate Link: https://charliexnee.github.io/pokemon-maps/
+Alternate Repository: charliexnee/pokemon-maps (github.com)
+Introduction 
+	Our project attempts to visualize places in a way that is both informative and fun, hoping to allow people to see mundane places with a new sense of wonder. We took inspiration from the popular franchise Pokemon. Every few years, Pokemon releases a new ‘generation’ which, among other things, contains a new ‘region’, or a fictional setting that is separate from but within the same universe as other regions. Each of these regions are heavily based off of real-world areas, with some changes. Our goal was to create these types of regions, but changing much less than the original games. This included defining landmarks to serve the function that cities and towns do in the games, draw simple, straightforward routes that connect them, and displaying various Pokemon to represent actual animal species that can be found in the area. Our area of study includes one map of mainland Southeast Asia (including Singapore) and one map focused entirely on Singapore.
 
-## Charlie Nee and Jimmy Nguyen
+Data and Methods
+Singapore
+All Singapore data came from the Singapore open data portal. For many of the layers, I tried several different operations but only some of the results ended up on the final site.
+
+Stations
+For selecting the stations, I chose to use the population dataset, the planning districts boundaries, the train stations boundaries (polygons), and the train station names dataset (points). I performed a join between the planning districts boundaries and the population data set. I also performed a spatial join between the train station names and the train station boundaries. Overlaying these results with each other, I manually selected stations that were located in the most populated areas. In addition, I selected a station within the downtown core area, despite not being part of the populated areas. Eventually, I assigned each station a number that, which order could be followed using the routes (see next section) without doubling back. This is an attempt to simulate the game mechanic of badges, where the player travels to each city in a particular order in order to collect each badge. 
+
+Routes
+For the routes, I used the MRT lines file (lines). After selecting the needed stations, I edited the MRT lines file to remove all train lines that were not touching the selected stations. Then, I created a new file and traced over the lines in order to make them simpler with less bends and more connected (the file had gaps where stations are), while still trying to preserve the general curves.
+
+Pokemon
+I didn’t use any specific datasets for the Pokemon. Instead, I chose some Pokemon that are based off of species that are found in Singapore and added them onto the map. I manually placed them based off of their habitat. Then, I added a blurb with some fun facts.
+
+Pokemon Centers and Pokemarts
+	I chose to represent clusters of hawker centers as pokemon centers. In the games, Pokemon centers are used to heal your Pokemon and to get a sense of the local culture, much like a community center. Hawker centers represent much of the same function, as it is a place to eat and regularly see one’s neighbors. Additionally, I chose Pokemarts, the stores in the game to represent supermarkets. 
+	Initially, I attempted to use the built in QGIS DBSCAN function in order to produce the clusters. However, I was having a hard time finding the correct parameters so that my clusters wouldn’t just result in being one or all of the features as my radius was too large or too small.  Instead, I chose to visualize each file as a heatmap instead, and manually place points in the darkest areas.
+
+
+
+Southeast Asia
+	I started with a watercolor base map to convey a cartoonist style. I also left two other base maps available in the legend, OSM Streets and ESRI Nat Geo World Map. This allows the map viewer to see more detail regarding the roads if they decide to zoom in. It also provides them flexibility in the amount of detail they want to see, with the watercolor map providing the least detail but being most appropriate stylistically to share the main information regarding the routes, badges, and pokemon.
+The creation of the Southeast Asia map pathway (Routes 1-4) were created referencing the Pan-Asia Railway Network (Bangkok Post). Since the reference map lists major city points along its pathway, such as Phnom Penh in Cambodia and Ho Chi Minh in Vietnam, I looked up the coordinates for each major city using Google maps and used those coordinates to shape the pathway in the Pokemon map. For the smaller cities unspecified on the reference map, I used the lack of information as an opportunity to simplify the pathway.
+
+	Since this is a map on a smaller scale, where a player would seek an extremely broad perspective of the world outside one single region or country, I did not include Pokemon Centers or Pokemarts; these are smaller details that should be included in country-level maps, as shown in the Singapore map. Instead, the main information that must be conveyed are the regional countries and the pokemon relevant to the area. By clicking on each pokemon, the map viewer opens up a popup with information about the pokemon species. I created lore that made sense given the pokemon’s characteristics.
+
+Placed along the routes are gym badges symbolized by a country’s national flag. The circles are a stylistic preference to mimic in-game badges trainers can earn from battling pokemon gym leaders. Originally, I neglected using popups because they were not centered correctly. Upon setting the iconAnchor relative to the icon size [x, x], where iconAnchor = [x/2, x/2] and popupAnchor = [0, -x/2], the problem was resolved. I then included popup texts with each country icon so the map viewer can understand that they are badges and not random circles. 
+	Originally, I kept each gym badge as a separate overLay (e.g. Vietnam Gym, Cambodia Gym, etc.). To keep the legend less cluttered, I combined all the gyms into one single layer called Gyms. Map viewers can tell which badge represents which country by clicking on it. The popup clarifies that by beating that gym, they can earn the “[Country Name] Badge]”, keeping the tone playful but also informative.
+
+
+Results and Discussion
+We were able to create a website containing two interactive maps. At its core, each of our maps contained a group of overlays to display each data layer we created. Both of our maps are linked from a simple landing page with a brief description of our project.
+Singapore
+	The Singapore map ended up being a fairly straightforward map with Pokemon inspired representations, more so than the complete game map. This was due to the popups relating directly to real world animals and mentions of supermarkets and hawker centers. 
+
+The only thing that was completely fabricated, and not just altered to be a simplified representation, was the numbering of each station to represent badge collection, as there is no badge for anyone to collect in the real world. Since this was the only detail, I think it could be quite jarring and easy for the user to misunderstand, so I should have added either more directly fabricated aspects or have taken this out.
+
+Overall, the decision to represent real facts about Singapore with various Pokemon inspired graphics served both my goals to inform the user about Singapore while also being fun and exciting. I thought that the Pokemon popups were easily the strongest part of my map, despite being the least academically oriented. I thought I did a good job of catching the user’s attention in a fun way while still providing information about animals in Singapore. In general, I thought the symbology was quite strong as I was able to draw directly from the game, and I had many bright colors and large symbols to mimic the feel of a video game map.
+After the presentation, I took the feedback from the class and made the routes thinner and the city icons smaller, but I wanted them to be very visible in a cartoonish way so I still kept them fairly large. I intended on fixing the routes so that they would connect better, but ran out of time and decided to leave it since the map functions best when it is not zoomed into that level anyways.
+One thing I really could have improved on is making sure that my map aligned with the regional map better. For example, the regional map included lore about Pokemon themselves, situating them into the real world while my map used Pokemon as representations of real species. This is something that could’ve been resolved with earlier and more frequent communication. Furthermore, my code itself was quite messy, specifically with the Pokemon layer. It could have been cleaned up if I had created a spreadsheet with all the Pokemon, their coordinates and their popup descriptions first, instead of hardcoding it all in.
+
+Southeast Asia
+The Southeast Asia Pokemon map conveys information on a larger scale, focusing on the broader routes players can take and the gyms they will find along the way. The map’s legend allows the player to interact with the map by deciding which routes should appear. Map viewers can click on gym badges and pokemon to receive more information. The decision to use a watercolor base map helps maintain consistency with the Pokemon theme. The decision to portray flags as badges also maintains a Pokemon theme while keeping the map grounded to Southeast Asia. Information about the pokemon heightens the experience of viewing the gamified map of Southeast Asia in the context of Pokemon. In all, map viewers who are familiar with the Pokemon games will recognize key traits of Pokemon game maps while also recognizing that this is inspired by the real-life region of Southeast Asia.
+	One way I can improve and expand this map is to link the Southeast Asia map to the larger-scale country maps more clearly. For example, finding a way to zoom into Charlie’s Singapore map by clicking the Singapore badge would be a valuable addition. At the moment, the two maps feel little apart, but are meant to be in the same world on different scales.
+
+Acknowledgements
+	We would like to thank Jonathan Chipman and Ryan McKeon for all their support throughout the term and help getting started with the project. We would also like to thank all our classmates that provided feedback and who reached out to us with encouragement.
+	Thanks Professor Chipman and Professor McKeon for also making the coding lessons very beginner friendly. As you may recall, Jimmy  was incredibly nervous at the beginning of the term about coding. Lab 6 walked us through everything we needed. With very simple code, we were able to make a map that aligns with our personal passions in gaming. Lastly, thank you for allowing me to borrow a laptop. That was very helpful and I’m grateful to you both for going the extra mile to help students out. In such an odd year, you have certainly made Geovisualization an accessible course.
+	Charlie would like to especially thank Professor Chipman for all his understanding and support during an abnormally difficult term and for creating such an incredibly interesting class. Charlie’s excitement about the class was so infectious that all their friends asked them where they could also learn to make cool maps, and it finally solidified their decision to leave the tech field and focus entirely on a career in GIS. Charlie would also like to especially thank Professor McKeon for helping them through several courses in the department throughout the past few years and always being incredibly supportive, helpful, and friendly despite having enormous amounts of students per term, and credits him as the reason they have stuck it out through all of ArcMap’s quirks.
+
+
+

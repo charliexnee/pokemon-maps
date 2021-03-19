@@ -7,7 +7,7 @@
         <!-- Set up the style of the map (i.e. size) and text for the web page -->
         <style type="text/css">
 			html, body { height: 100%; margin: 15px; padding: 0;}
-			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto}
+			#map { height: 70%; width: 80%; margin-left: auto; margin-right: auto; font-family: Georgia, 'Times New Roman', Times, serif;}
 		</style>
         
         <!-- ACCESS the code that runs Leaflet from the web -->
@@ -42,13 +42,7 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
             });
             
-            var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            });
-            
-            var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-	           attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-            });
+           
             
             var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
 	           attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
@@ -57,16 +51,14 @@
            
             var baseMaps = {
                 "<b>OSM Streets</b>": OpenStreetMap_HOT,
-                "<b>ESRI World Imagery</b>": Esri_WorldImagery,
-                "<b>ESRI World Street Map</b>": Esri_WorldStreetMap,
                 "<b>ESRI Nat Geo World Map</b>": Esri_NatGeoWorldMap,
                 "<b>Watercolor</b>": Stamen_Watercolor}
                 
             var myIcon = L.icon({
                 iconUrl: '../assets/Region/icons/singapore.png',
                 iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+                iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -74,8 +66,8 @@
             var myIcon2 = L.icon({
                 iconUrl: '../assets/Region/icons/malaysia.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+               iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -83,8 +75,8 @@
             var myIcon3 = L.icon({
                 iconUrl: '../assets/Region/icons/cambodia.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+               iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -92,8 +84,8 @@
             var myIcon4 = L.icon({
                 iconUrl: '../assets/Region/icons/vietnam.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+                iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -101,8 +93,8 @@
             var myIcon5 = L.icon({
                 iconUrl: '../assets/Region/icons/thailand.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+                iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -110,8 +102,8 @@
             var myIcon6 = L.icon({
                 iconUrl: '../assets/Region/icons/laos.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+                 iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
             
@@ -119,8 +111,8 @@
             var myIcon7 = L.icon({
                 iconUrl: '../assets/Region/icons/myanmar.png',
                iconSize: [40, 40],
-                iconAnchor: [50, 50],
-                popupAnchor: [50, 50]
+                iconAnchor: [20, 20],
+                popupAnchor: [0, -20]
                 
             });
         
@@ -169,29 +161,27 @@
                 
 ];
             
-            var point1 = L.marker([1.3869594216596461, 103.90140691312331], {icon:myIcon});
+            var point1 = L.marker([1.3869594216596461, 103.90140691312331], {icon:myIcon})
+            .bindPopup("Defeat this gym to earn the Singapore Badge!");;
             
-            var point2 = L.marker([3.505267546897482, 101.83597739142334],{icon:myIcon2});
+            var point2 = L.marker([3.505267546897482, 101.83597739142334],{icon:myIcon2})
+            .bindPopup("Defeat this gym to earn the Malaysia Badge!");;
             
-            var point3 = L.marker([12.932360489677642, 104.20902467210422],{icon:myIcon3});
+            var point3 = L.marker([12.932360489677642, 104.00902467210422],{icon:myIcon3})
+            .bindPopup("Defeat this gym to earn the Cambodia Badge!");;
             
-            var point4 = L.marker([14.724485464230314, 108.16410188344028], {icon:myIcon4});
+            var point4 = L.marker([14.724485464230314, 108.16410188344028], {icon:myIcon4})
+            .bindPopup("Defeat this gym to earn the Vietnam Badge!");;
             
-            var point5 = L.marker([15.911217585599788, 101.4404696106723],{icon:myIcon5});
+            var point5 = L.marker([14.911217585599788, 101.4404696106723],{icon:myIcon5})
+            .bindPopup("Defeat this gym to earn the Thailand Badge!");;
             
-            var point6 = L.marker([19.634893619592848, 102.40726700423828],{icon:myIcon6});
+            var point6 = L.marker([19.634893619592848, 102.40726700423828],
+                {icon:myIcon6}).bindPopup("Defeat this gym to earn the Laos Badge!");;
             
     //        var point7 = L.marker([21.281762671279612, 96.6504310102957],{icon:myIcon3});
             
-          var point7 = L.marker([21.081762671279612, 97.0504310102957],{icon:myIcon7}).bindPopup("Myanmar (Burma)");
-            
-            var circle1 = L.circle([33.365531315111625, -111.85815312739265],    {
-                color: 'green',
-                fillColor: '#00ff00',
-                fillOpacity: 0.3,
-                radius: 200 // in meters
-                }).bindPopup("Area with good food");
-            
+            var point7 = L.marker([21.081762671279612, 97.0504310102957], {icon:myIcon7}).bindPopup("Defeat the Myanmar Gym to earn the Burma Badge!");
             
                
             var polyline = L.polyline(latlngs, {color: 'black'})
@@ -206,31 +196,131 @@
             var polyline4 = L.polyline(latlngs4, {color: 'red'})
             ;
             
+            
+            
+            
+            
+            
+            
+             // pokemon
+            var torkoal = L.icon({
+                iconUrl: '../assets/Region/icons/torkoal.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var torchic = L.icon({
+                iconUrl: '../assets/Region/icons/torchic.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var mudkip = L.icon({
+                iconUrl: '../assets/Region/icons/mudkip.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var ivysaur = L.icon({
+                iconUrl: '../assets/Region/icons/ivysaur.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            var grovyle = L.icon({
+                iconUrl: '../assets/Region/icons/grovyle.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
+            // markers
+
+            var ivysaurMarker = new L.Marker([23.571784361612327, 103.20383366327239],
+                {
+                    icon: ivysaur,
+                }
+            )
+            ivysaurMarker.bindPopup("The region is renowed for its impressive fauna. Among the animals adapted to the environment is the ivysaur. The bud on its back blooms into a beautiful flower as it grows and, eventually, evolves into the giant Venasaur!", {});
+
+            var torchicMarker = new L.Marker([8.154663874673128, 99.60031806365382],
+                {
+                    icon: torchic,
+                }
+            )
+            
+            torchicMarker.bindPopup("A small chick covered in orange feathers, you will find many torchic walking the streets. Although many have become domesticated in other areas of the world, many wild ones are thriving here.", {});
+        
+            
+            var mudkipMarker = new L.Marker([22.910412612425313, 99.45773988385324],
+                {
+                    icon: mudkip,
+                }
+            )
+            
+            mudkipMarker.bindPopup("Emerging in the rainy season, mudkip emerge as plains flood, creating an evironment conducive for their love of wet dirt. Mudkip are playful creatures and make an otherwise gloomy season more delightful.", {});
+
+            var torkoalMarker = new L.Marker([18.070399881009916, 99.1169195627005],
+                {
+                    icon: torkoal,
+                }
+            )
+            
+            torkoalMarker.bindPopup("Torkoal are native to Southeast Asia. Trainers from all around the world come to the region to hunt and capture this pokemon, making them nearly extinct.", {});
+        
+
+            var grovyleMarker = new L.Marker([13.846339949897903, 106.06027884655856],
+                {
+                    icon: grovyle,
+                }
+            )
+            
+            grovyleMarker.bindPopup("Grovyle, the evolved form of Treeko, also exist abundantly given the region's many trees. Grovyle have excellent camouflage hiding among the leaves, jumping from tree to tree with excellent levels of agility.", {});
+        
+
+
+
+            // marker group
+            var pokemon = L.layerGroup([ivysaurMarker, torchicMarker, mudkipMarker, torkoalMarker, grovyleMarker]);
+            
+            var countries = L.layerGroup([point1, point2, point3, point4, point5, point6, point7]);
+            // marts
+            //function popupsMart(feature, layer) {
+              //  layer.bindPopup("Lots of supermarkets near here!")
+            //}; 
+             
+            //var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+            
+            
             var overLays = {
-                "<b>Singapore Gym</b>": point1,
-                "<b>Malaysia Gym</b>": point2,
-                "<b>Cambodia Gym</b>": point3,
-                "<b>Vietnam Gym</b>": point4,
-                "<b>Thailand Gym</b>": point5,
-                "<b>Laos Gym</b>": point6,
-                "<b>Myanmar Gym</b>": point7,
+              //  "<b>Malaysia Gym</b>": point2,
+            //    "<b>Cambodia Gym</b>": point3,
+          //      "<b>Vietnam Gym</b>": point4,
+        //        "<b>Thailand Gym</b>": point5,
+         //   "<b>Laos Gym</b>": point6,
+         //     "<b>Myanmar Gym</b>": point7,
+         //       "<b>Singapore Gym</b>": point1,
                 "<b>Route 1</b>": polyline,
                 "<b>Route 2</b>": polyline2,
                 "<b>Route 3</b>": polyline3,
                 "<b>Route 4</b>": polyline4,
+                "<b>Pokemon</b>": pokemon,
+                "<b>Gyms</b>": countries,
                 };
             
             
-             
-            //var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-            
+           
             
         // Set up function to build the map
             function initialize() {
                      
         // This creates the map
             var map = L.map('map', {     
-            center: [14.164476949844767, 104.49210212494292],  // this sets the center of the map [lat, lon]
+            center: [13.964476949844767, 104.09210212494292],  // this sets the center of the map [lat, lon]
             zoom: 5,                     // this sets the zoom level of the                                    map when it loads
             layers: [Stamen_Watercolor]   // this defines the base map
             });
@@ -245,9 +335,11 @@
     </head>
     
     <body onload="initialize()">  <!-- run the initiialize() function when the page loads -->
-        <h1>This is a map for Pokemon in SE Asia! (In Progress)</h1>  <!-- Title above the map -->
+        <h1>Pokemon in Southeast Asia</h1>  <!-- Title above the map -->
         
         <div id="map"></div>   <!-- Object that contains the map -- placed after the title so that it is below the title -->
+        
+         <b1>Pokemon icons are sourced from Bulbapedia, the online encyclopedia about Pokemon. Country icons are sourced from iconfinder.com. The route on this map is referenced to the Pan-Asia Railway Network from Bangkok Post.</b1>
     
     </body>
 </html>

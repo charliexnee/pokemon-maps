@@ -29,8 +29,6 @@
         
         <!-- The Main JavaScript Code Block that will run our map -->
         <script> 
-            
-
 
         // Basemap layer for your map -- many more choices here: https://leaflet-extras.github.io/leaflet-providers/preview/
         var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
@@ -132,6 +130,13 @@
                 popupAnchor: [0, -25]
             });
 
+            var vulpix = L.icon({
+                iconUrl: '../assets/Singapore/icons/vulpix.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25]
+            });
+
             // markers
 
             var sandshrewMarker = new L.Marker([1.385166, 103.800289],
@@ -175,9 +180,16 @@
             
             treeckoMarker.bindPopup("Many amphibians can be found in Singapore! One example is the gecko. While Treecko is actually a wood gecko, which are found in Australia, there plenty of his cousins, the common house geckos, reside in Singapore. They can often be found inside human apartments. Just don't scare them or they might drop their tails!", {});
         
-
+            var vulpixMarker = new L.Marker([1.403962, 103.791233],
+                {
+                    icon: vulpix,
+                }
+            )
+            
+            vulpixMarker.bindPopup("The adorable vulpix was based off of the red fox! While these furry friends are not native to Singapore, a red fox was found wandering around Hong Kong now resides at the Singapore Zoo. He was believed to have been illegally imported to Hong Kong and had gotten lost. Hopefully he feels safe in his new home!", {});
+        
             // marker group
-            var pokemon = L.layerGroup([sandshrewMarker, pheromosaMarker, rattataMarker, dewgongMarker, treeckoMarker]);
+            var pokemon = L.layerGroup([sandshrewMarker, pheromosaMarker, rattataMarker, dewgongMarker, treeckoMarker, vulpixMarker]);
             // marts
             function popupsMart(feature, layer) {
                 layer.bindPopup("Lots of supermarkets near here!")
@@ -269,5 +281,6 @@
             Animal Info Sources:
             <li><a href="https://www.nparks.gov.sg/gardens-parks-and-nature/dos-and-donts/animal-advisories/pangolins"> Pangolin </a></li>
             <li><a href="http://www.wildsingapore.com/wildfacts/vertebrates/mammals/dugong.htm"> Dugong </a></li>
+            <li><a href="https://www.straitstimes.com/lifestyle/red-fox-found-wandering-in-hong-kong-has-new-home-here">Red Fox</a></li>
         </div>
 </html>
